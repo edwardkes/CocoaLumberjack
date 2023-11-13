@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name         = "CocoaLumberjack"
-    spec.version      = "1.0.0" # Adjust the version number
+    spec.version      = "3.8.3" # Adjust the version number
     spec.summary      = "A fast & simple, yet powerful & flexible logging framework for Mac and iOS."
     spec.homepage     = "https://github.com/edwardkes/CocoaLumberjack"
     spec.license      = { :type => "BSD-3-Clause", :file => "LICENSE.md" }
