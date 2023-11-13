@@ -31,6 +31,24 @@
     return self;
 }
 
-
+-(void)logMessage:(DDLogMessage *)logMessage {
+    
+    NSString *logString = logMessage.message;
+    
+    NSDictionary *logDict = @{@"message": logString};
+    NSData *logData = [NSJSONSerialization dataWithJSONObject:logDict options:0 error:nil];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.apiEndPoint];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:logData];
+    [request setValue:@"application/json" forKey:@"Content-Type"];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler: ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error sending log to server: %@", error);
+        }
+        // Handle the response here
+    }]resume];
+}
 
 @end
