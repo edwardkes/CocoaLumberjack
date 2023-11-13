@@ -18,37 +18,46 @@
 @interface HTTPLogger ()
 
 @property (strong, nonatomic) NSURL *apiEndPoint;
+@property (strong, nonatomic) dispatch_queue_t loggerQueue;
 
 @end
 
 @implementation HTTPLogger
 
+@dynamic loggerQueue;
+
 - (instancetype)initWithAPIEndpoint:(NSURL *)endpoint {
     self = [super init];
     if (self) {
         _apiEndPoint = endpoint;
+        _loggerQueue = dispatch_queue_create("com.menora.httplogger", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
 
 -(void)logMessage:(DDLogMessage *)logMessage {
     
-    NSString *logString = logMessage.message;
-    
-    NSDictionary *logDict = @{@"message": logString};
-    NSData *logData = [NSJSONSerialization dataWithJSONObject:logDict options:0 error:nil];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.apiEndPoint];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:logData];
-    [request setValue:@"application/json" forKey:@"Content-Type"];
-    
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler: ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error sending log to server: %@", error);
-        }
-        // Handle the response here
-    }]resume];
+    dispatch_async(self.loggerQueue, ^{
+        NSString *logString = logMessage.message;
+        
+        NSDictionary *logDict = @{@"message": logString};
+        NSData *logData = [NSJSONSerialization dataWithJSONObject:logDict options:0 error:nil];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.apiEndPoint];
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:logData];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if (error) {
+                        NSLog(@"Error sending log to server: %@", error);
+                        // Add error handling here
+                    }
+                    // Handle the response here
+        }];
+        [task resume];
+
+    });
 }
 
 @end
