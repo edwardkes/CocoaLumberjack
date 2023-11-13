@@ -11,7 +11,7 @@
 //
 // * Neither the name of Deusty nor the names of its contributors may be used
 //   to endorse or promote products derived from this software without specific
-//   prior written permission of Deusty, LLC.
+//   prior written permission of Deusty, LLC. 
 
 #import <Foundation/Foundation.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
