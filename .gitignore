@@ -13,7 +13,7 @@ DerivedData/
 !Lumberjack.xcodeproj
 
 # CocoaPods (podspec is generated)
-CocoaLumberjack.podspec
+# CocoaLumberjack.podspec
 
 # Carthage
 Carthage/Build
