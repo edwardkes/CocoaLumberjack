@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -472,8 +472,9 @@
 		DCB3184714EB418D001CFBEE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					18F3BFD61A81E06E00692297 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -595,6 +596,7 @@
 		18F3BFE91A81E06E00692297 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRIVATE_HEADERS_FOLDER_PATH = "$(BUILT_PRODUCTS_DIR)/private";
 				PRODUCT_BUNDLE_IDENTIFIER = com.deusty.cocoalumberjack;
 				PRODUCT_NAME = CocoaLumberjack;
@@ -605,6 +607,7 @@
 		18F3BFEA1A81E06E00692297 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRIVATE_HEADERS_FOLDER_PATH = "$(BUILT_PRODUCTS_DIR)/private";
 				PRODUCT_BUNDLE_IDENTIFIER = com.deusty.cocoalumberjack;
 				PRODUCT_NAME = CocoaLumberjack;
@@ -620,6 +623,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Xcode/Lumberjack/CocoaLumberjack-Prefix.pch";
 				INFOPLIST_FILE = "$(SOURCE_ROOT)/Sources/$(TARGET_NAME)/Supporting Files/$(TARGET_NAME)-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 			};
 			name = Debug;
 		};
@@ -631,6 +635,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Xcode/Lumberjack/CocoaLumberjack-Prefix.pch";
 				INFOPLIST_FILE = "$(SOURCE_ROOT)/Sources/$(TARGET_NAME)/Supporting Files/$(TARGET_NAME)-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 			};
 			name = Release;
 		};
@@ -641,6 +646,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "$(SOURCE_ROOT)/Sources/$(TARGET_NAME)/Supporting Files/$(TARGET_NAME)-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 			};
 			name = Debug;
 		};
@@ -651,6 +657,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "$(SOURCE_ROOT)/Sources/$(TARGET_NAME)/Supporting Files/$(TARGET_NAME)-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 			};
 			name = Release;
 		};
@@ -658,6 +665,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 435F03AB2174A39200A86B2D /* Module-Debug.xcconfig */;
 			buildSettings = {
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -665,6 +678,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 435F03AA2174A39200A86B2D /* Module-Release.xcconfig */;
 			buildSettings = {
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
