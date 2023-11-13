@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HTTPLogger : DDAbstractLogger <DDLogger>
 
--(instancetype)initWithAPIEndpoint:(NSURL *)endpoint andRertryThreshold:(NSInteger)threshold;
+-(instancetype)initWithAPIEndpoint:(NSURL *)endpoint withRertryThreshold:(NSInteger)threshold andFileSize:(NSInteger)maxFileSize;
 
 @end
 

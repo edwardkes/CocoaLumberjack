@@ -29,13 +29,18 @@
 
 @dynamic loggerQueue;
 
-- (instancetype)initWithAPIEndpoint:(NSURL *)endpoint andRertryThreshold:(NSInteger)threshold {
+- (instancetype)initWithAPIEndpoint:(NSURL *)endpoint withRertryThreshold:(NSInteger)threshold andFileSize:(NSInteger)maxFileSize {
     self = [super init];
     if (self) {
         _apiEndPoint = endpoint;
-        _retryThreshold = threshold;
         _loggerQueue = dispatch_queue_create("com.menora.httplogger", DISPATCH_QUEUE_SERIAL);
-        _fileLogger = [[DDFileLogger alloc] init];
+        
+        _fileLogger = [[DDFileLogger alloc] init]; // File logger for fallback
+        _fileLogger.maximumFileSize = maxFileSize * 1024 * 1024; // In mb
+        _fileLogger.rollingFrequency = 0; // No time-based rolling
+        [DDLog addLogger:_fileLogger];
+        
+        _retryThreshold = threshold;
         _retryCount = 0;
     }
     return self;
@@ -47,7 +52,7 @@
     });
 }
 
--(void)sendLogMessage:(DDLogMessage *)logMessage {
+- (void)sendLogMessage:(DDLogMessage *)logMessage {
     
     NSString *logString = logMessage.message;
     
@@ -74,7 +79,7 @@
 
 }
 
--(void)handleRetryWithLogMessage:(DDLogMessage *)logMessage {
+- (void)handleRetryWithLogMessage:(DDLogMessage *)logMessage {
     if (self.retryCount < self.retryThreshold) {
         self.retryCount ++;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), self.loggerQueue, ^{
